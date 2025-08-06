@@ -55,10 +55,10 @@ export function SignUpLayout({ children }: SignUpLayoutProps) {
       <aside className="hidden md:block fixed top-0 right-0 w-[498px] h-screen bg-background">
         <div className="h-full p-6 flex items-center justify-center">
           <Image
-            src="https://ui.shadcn.com/placeholder.svg"
-            alt="Image"
-            width="1800"
-            height="1800"
+            src="/assets/brand-gradient.svg"
+            alt="Brand Gradient"
+            width="450"
+            height="245"
             className="rounded-lg object-cover w-full h-full"
           />
         </div>
