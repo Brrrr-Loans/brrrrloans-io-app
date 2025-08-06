@@ -1,9 +1,7 @@
 "use client";
 
-import * as motion from "motion/react-client";
 import Image from "next/image";
 import { ReactNode } from "react";
-import { AuthCarousel } from "@/components/auth/auth-carousel";
 import { ThemeDropdown } from "@/components/theme/theme-dropdown";
 
 interface SignUpLayoutProps {
@@ -12,27 +10,52 @@ interface SignUpLayoutProps {
 
 export function SignUpLayout({ children }: SignUpLayoutProps) {
   return (
-    <div className="relative grid min-h-screen grid-cols-1 overflow-hidden md:grid-cols-2 lg:grid-cols-12">
-      <div className="relative col-span-1 flex flex-col justify-center px-5 pt-8 md:col-span-1 md:px-6 lg:col-span-5 lg:px-8">
-        <div className="absolute left-5 top-8 md:left-6 lg:left-8">
-          <Image
-            src="/logos/bl-logo.png"
-            alt="Logo"
-            width={40}
-            height={40}
-            className="h-10 w-auto"
-          />
-        </div>
-        <div className="absolute right-5 top-8 md:right-6 lg:right-8">
-          <ThemeDropdown />
-        </div>
-        <div className="mx-auto mt-16 w-full max-w-sm sm:mt-20 md:mt-24 lg:mr-0 lg:mt-20">
-          {children}
-        </div>
+    <div className="bg-background min-h-screen md:flex">
+      {/* Global Theme Dropdown - positioned absolutely over entire layout */}
+      <div className="absolute top-4 right-4 z-50">
+        <ThemeDropdown />
       </div>
-      <div className="hidden bg-muted md:block md:col-span-1 lg:col-span-7">
-        <AuthCarousel />
+
+      {/* Left side: Sign-up form */}
+      <div className="relative items-center justify-center px-6 py-24 md:flex md:w-1/2">
+        {/* Logo */}
+        <div className="absolute top-4 left-4 z-50">
+          <a
+            href="/dashboard"
+            aria-label="Go to dashboard"
+            className="flex items-center gap-2 font-medium"
+          >
+            <div className="flex h-8 w-8 items-center justify-center">
+              <Image
+                src="/logos/brrrr-icon-sq-gradient-black-2.svg"
+                alt="Brrrr Loans Logo Light Mode"
+                width={32}
+                height={32}
+                className="block dark:hidden"
+              />
+              <Image
+                src="/logos/brrrr-icon-sq-gradient-white-2.svg"
+                alt="Brrrr Loans Logo Dark Mode"
+                width={32}
+                height={32}
+                className="hidden dark:block"
+              />
+            </div>
+          </a>
+        </div>
+
+        {/* Sign-up form container */}
+        <div className="m-auto w-full max-w-sm">{children}</div>
       </div>
+
+      {/* Right side: Image */}
+      <Image
+        src="https://ui.shadcn.com/placeholder.svg"
+        alt="Image"
+        width="1800"
+        height="1800"
+        className="hidden max-w-[50%] object-cover md:block"
+      />
     </div>
   );
 }

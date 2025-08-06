@@ -78,66 +78,6 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-
-  .clerk-header-title {
-    position: relative;
-    text-indent: -9999px;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .clerk-header-title::before {
-    content: "Sign In";
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    align-items: flex-start;
-    align-self: stretch;
-    left: 0;
-    top: 0;
-    text-indent: 0;
-    width: 100%;
-    white-space: normal;
-    color: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: 2rem;
-    gap: 20px;
-  }
-
-  .clerk-header-subtitle {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    align-items: flex-start;
-    align-self: stretch;
-    left: 0;
-    top: 0;
-    text-indent: 0;
-    width: 100%;
-    white-space: normal;
-    line-height: 2rem;
-  }
-
-  .cl-organization-switcher {
-    color: hsl(var(--foreground));
-  }
-
-  .clerk-social-buttons {
-    gap: 16px;
-  }
-
-  .clerk-social-buttons-block-button {
-    color: var(--foreground);
-  }
-
-  .clerk-social-buttons-provider-icon-github {
-    filter: none;
-  }
-
-  .dark .clerk-social-buttons-provider-icon-github {
-    filter: brightness(0) invert(1);
-  }
 }
 
 @layer base {
@@ -146,6 +86,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Ensure the main page has a slightly different background for inset contrast */
+  body:has([data-variant="inset"]) {
+    background-color: hsl(var(--muted) / 30%);
   }
 }
 
@@ -196,10 +141,27 @@
 .cl-organizationSwitcher *,
 /* stylelint-disable-next-line selector-class-pattern */
 .cl-userButton * {
-  color: hsl(var(--sidebar-accent-foreground)) !important;
+  color: hsl(var(--sidebar-foreground)) !important;
 }
 
 /* Override secondary text elements */
+/* stylelint-disable-next-line selector-class-pattern */
+.cl-organizationSwitcher .cl-organizationPreviewMainIdentifier {
+  color: hsl(var(--sidebar-foreground)) !important;
+  font-weight: 500 !important; /* font-medium to match user name */
+  font-size: 14px !important; /* text-sm */
+}
+
+/* More specific targeting for organization name text */
+/* stylelint-disable-next-line selector-class-pattern */
+.cl-organizationPreviewMainIdentifier__organizationSwitcherTrigger,
+/* stylelint-disable-next-line selector-class-pattern */
+.cl-organizationPreviewMainIdentifier.cl-organizationPreviewMainIdentifier__organizationSwitcherTrigger {
+  color: hsl(var(--sidebar-foreground)) !important;
+  font-weight: 500 !important; /* font-medium to match user name */
+  font-size: 14px !important; /* text-sm */
+}
+
 /* stylelint-disable-next-line selector-class-pattern */
 .cl-organizationSwitcher .cl-organizationPreviewSecondaryIdentifier,
 /* stylelint-disable-next-line selector-class-pattern */
@@ -231,4 +193,142 @@
 .cl-organizationSwitcherPopoverActionButton:hover {
   background-color: hsl(var(--accent)) !important;
   color: hsl(var(--accent-foreground)) !important;
+}
+
+/* Sidebar styling improvements to match Dashboard-01 */
+
+/* Completely hide the sidebar rail for offcanvas mode */
+[data-sidebar="rail"] {
+  display: none !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+/* Fix sidebar menu button sizing to match reference design - exclude footer */
+[data-sidebar="menu-button"]:not(
+    [data-sidebar="footer"] [data-sidebar="menu-button"]
+  ) {
+  height: 2rem !important; /* h-8 equivalent */
+  min-height: 2rem !important;
+  padding: 0.375rem !important; /* p-1.5 equivalent */
+  font-size: 0.875rem !important; /* text-sm */
+}
+
+/* Override the large size variant to match reference - exclude footer */
+[data-sidebar="menu-button"][data-size="lg"]:not(
+    [data-sidebar="footer"] [data-sidebar="menu-button"]
+  ) {
+  height: 2rem !important; /* Force h-8 instead of h-12 */
+  min-height: 2rem !important;
+  padding: 0.375rem !important; /* p-1.5 equivalent */
+  font-size: 0.875rem !important; /* text-sm */
+}
+
+/* Fix icon sizing in sidebar menu button - exclude header and footer */
+[data-sidebar="menu-button"]:not(
+    [data-sidebar="header"] [data-sidebar="menu-button"],
+    [data-sidebar="footer"] [data-sidebar="menu-button"]
+  )
+  svg {
+  width: 1rem !important; /* !size-4 equivalent (16px) */
+  height: 1rem !important;
+  flex-shrink: 0 !important;
+}
+
+/* Fix text styling in sidebar menu button - exclude footer */
+[data-sidebar="menu-button"]:not(
+    [data-sidebar="footer"] [data-sidebar="menu-button"]
+  )
+  span {
+  font-size: 0.875rem !important; /* text-base */
+  font-weight: 400 !important; /* font-semibold */
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Sidebar group label styling */
+[data-sidebar="group-label"] {
+  font-size: 0.75rem !important;
+  font-weight: 400 !important;
+  color: hsl(var(--sidebar-foreground) / 70%) !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+
+/* Footer NavUser button hover styling - high specificity, must come first */
+[data-sidebar="footer"] [data-sidebar="menu-button"]:hover {
+  background-color: hsl(
+    240deg 4.8% 85%
+  ) !important; /* Darker hover in light mode */
+
+  border-radius: 0.75rem !important; /* rounded-lg for more rounded corners */
+}
+
+/* Ask AI button specific styling - must come first for specificity */
+[data-sidebar="menu-button"].bg-primary {
+  color: white !important;
+}
+
+.dark [data-sidebar="menu-button"].bg-primary {
+  color: black !important;
+}
+
+/* Sidebar menu button text styling - override component inline styles */
+[data-sidebar="menu-button"]:not(
+    [data-sidebar="header"] [data-sidebar="menu-button"],
+    [data-sidebar="footer"] [data-sidebar="menu-button"],
+    .bg-primary
+  ) {
+  color: hsl(var(--sidebar-foreground)) !important;
+}
+
+[data-sidebar="menu-button"]:not(
+    [data-sidebar="header"] [data-sidebar="menu-button"],
+    [data-sidebar="footer"] [data-sidebar="menu-button"]
+  ):hover {
+  color: hsl(var(--sidebar-foreground)) !important;
+  background-color: hsl(
+    240deg 4.8% 90%
+  ) !important; /* Darker than default sidebar-accent in light mode */
+}
+
+[data-sidebar="menu-button"][data-active="true"]:not(
+    [data-sidebar="header"] [data-sidebar="menu-button"],
+    [data-sidebar="footer"] [data-sidebar="menu-button"]
+  ) {
+  color: hsl(var(--sidebar-foreground)) !important;
+  font-weight: 400 !important;
+  background-color: hsl(
+    240deg 4.8% 90%
+  ) !important; /* Darker than default sidebar-accent in light mode */
+}
+
+/* Dark mode specific overrides - footer first due to higher specificity */
+.dark [data-sidebar="footer"] [data-sidebar="menu-button"]:hover {
+  background-color: hsl(
+    var(--sidebar-accent)
+  ) !important; /* Use default in dark mode */
+
+  border-radius: 0.75rem !important; /* rounded-lg for more rounded corners */
+}
+
+.dark
+  [data-sidebar="menu-button"]:not(
+    [data-sidebar="header"] [data-sidebar="menu-button"],
+    [data-sidebar="footer"] [data-sidebar="menu-button"]
+  ):hover {
+  background-color: hsl(
+    var(--sidebar-accent)
+  ) !important; /* Use default in dark mode */
+}
+
+.dark
+  [data-sidebar="menu-button"][data-active="true"]:not(
+    [data-sidebar="header"] [data-sidebar="menu-button"],
+    [data-sidebar="footer"] [data-sidebar="menu-button"]
+  ) {
+  background-color: hsl(
+    var(--sidebar-accent)
+  ) !important; /* Use default in dark mode */
 }

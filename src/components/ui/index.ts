@@ -20,7 +20,7 @@ export * from "./infinite-slider";
 export * from "./input";
 export * from "./label";
 export * from "./login-form";
-export * from "./openai-logo";
+
 export * from "./pagination";
 export * from "./popover";
 export * from "./progress";

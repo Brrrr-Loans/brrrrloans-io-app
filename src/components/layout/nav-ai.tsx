@@ -1,6 +1,6 @@
 "use client";
 
-import { OpenAILogo } from "@/components/ui/openai-logo";
+import { OpenAIIcon } from "@/components/assets/openai-icon";
 
 import {
   SidebarGroup,
@@ -18,9 +18,9 @@ export function NavAI() {
           <SidebarMenuItem>
             <SidebarMenuButton
               tooltip="Ask AI"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground"
+              className="rounded-md bg-primary text-white hover:bg-primary/90 hover:text-white active:bg-primary/90 active:text-white dark:text-black dark:hover:text-black dark:active:text-black min-w-8 duration-200 ease-linear"
             >
-              <OpenAILogo size={16} />
+              <OpenAIIcon size={20} />
               <span>Ask AI</span>
             </SidebarMenuButton>
           </SidebarMenuItem>

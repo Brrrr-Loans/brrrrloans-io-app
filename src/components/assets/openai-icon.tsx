@@ -4,12 +4,12 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-interface OpenAILogoProps {
+interface OpenAIIconProps {
   className?: string;
   size?: number;
 }
 
-export function OpenAILogo({ className = "", size = 16 }: OpenAILogoProps) {
+export function OpenAIIcon({ className = "", size = 16 }: OpenAIIconProps) {
   const { theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 

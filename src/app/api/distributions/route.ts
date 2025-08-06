@@ -51,7 +51,7 @@ export async function GET(request: Request) {
         deal:deal_id(deal_name)
       `
       )
-      .eq("investor_id", investorId);
+      .eq("bsi_contact_id", investorId);
 
     // Apply filters
     if (period !== "all") {
@@ -62,9 +62,16 @@ export async function GET(request: Request) {
       else if (period === "1y") startDate.setFullYear(now.getFullYear() - 1);
       query = query.gte("created_at", startDate.toISOString());
     }
-    if (status) query = query.eq("status", status);
-    if (type) query = query.eq("distribution_type", type);
-    if (search) query = query.or(`id.ilike.%${search}%`);
+    // Note: status and distribution_type fields don't exist in bsi_distributions table
+    // if (status) query = query.eq("status", status);
+    // if (type) query = query.eq("distribution_type", type);
+    if (search) {
+      // For numeric id search, try to parse as number, otherwise skip id search
+      const searchAsNumber = parseInt(search, 10);
+      if (!isNaN(searchAsNumber)) {
+        query = query.eq("id", searchAsNumber);
+      }
+    }
 
     query = query.order("created_at", { ascending: false });
 

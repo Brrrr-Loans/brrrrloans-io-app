@@ -7,7 +7,7 @@ export interface BsiDistribution {
   notes: string | null; // text, nullable
   created_at: string | null; // timestamp with time zone, nullable
   updated_at: string | null; // timestamp with time zone, nullable
-  investor_id: string | null; // bigint, nullable
+  bsi_contact_id: string | null; // bigint, nullable - renamed from investor_id
   capital_contribution: string; // numeric
   loan_amount_snapshot: string; // numeric
   upb_close: string | null; // numeric, nullable

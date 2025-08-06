@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { type Icon } from "lucide-react";
+import React from "react";
 
 import {
   SidebarGroup,
@@ -18,24 +18,27 @@ export function NavMain({
   items: {
     title: string;
     url: string;
-    icon: Icon;
+    icon: React.ComponentType<{ className?: string }>;
     isActive?: boolean;
   }[];
 }) {
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Originations</SidebarGroupLabel>
-      <SidebarGroupContent>
+      <SidebarGroupLabel className="text-xs font-medium text-sidebar-foreground/70">
+        Originations
+      </SidebarGroupLabel>
+      <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           {items.map((item) => (
-            <SidebarMenuItem key={item.url}>
+            <SidebarMenuItem key={item.url} className="flex items-center gap-2">
               <SidebarMenuButton
                 asChild
                 isActive={item.isActive}
                 tooltip={item.title}
+                className="text-sidebar-foreground/70 font-normal hover:text-sidebar-foreground hover:bg-sidebar-accent data-[active=true]:text-sidebar-foreground data-[active=true]:font-normal"
               >
                 <Link href={item.url}>
-                  <item.icon />
+                  <item.icon className="h-4 w-4" />
                   <span>{item.title}</span>
                 </Link>
               </SidebarMenuButton>

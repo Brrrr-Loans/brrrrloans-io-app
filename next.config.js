@@ -6,6 +6,7 @@ const nextConfig = {
       { protocol: "https", hostname: "api.app.brrrrloans.com" },
       { protocol: "https", hostname: "assets.vercel.com" },
       { protocol: "https", hostname: "supabase.com" },
+      { protocol: "https", hostname: "cdn.builder.io" },
     ],
   },
   allowedDevOrigins: [
@@ -25,4 +26,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

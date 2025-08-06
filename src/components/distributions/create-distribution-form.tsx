@@ -294,20 +294,23 @@ export function CreateDistributionForm({
       formData.append("investorPayments", JSON.stringify(investorPayments));
 
       // Submit the form
-      const result = await createDistribution(formData);
+      await createDistribution(formData);
 
-      if (result.success) {
-        toast.success("Distribution created successfully");
-        form.reset();
-        if (onSuccess) {
-          onSuccess();
-        } else {
-          router.push(`/dashboard/distributions`);
-        }
+      // If we get here, the function succeeded (no error thrown)
+      toast.success("Distribution created successfully");
+      form.reset();
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        router.push(`/dashboard/distributions`);
       }
     } catch (error) {
       console.error("Error creating distribution:", error);
-      toast.error("Failed to create distribution. Please try again.");
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to create distribution. Please try again.";
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
