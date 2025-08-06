@@ -70,8 +70,18 @@ export function SignInLayout({ children }: SignInLayoutProps) {
               height="52"
               className="max-w-[80%]"
             />
-            <p className="text-white text-base font-medium mt-6 text-center">
-              Empowering Intelligent Investors
+            <p 
+              className="text-center mt-6"
+              style={{
+                color: '#FFF',
+                fontFamily: 'Inter',
+                fontSize: '12px',
+                fontStyle: 'normal',
+                fontWeight: 500,
+                lineHeight: 'normal'
+              }}
+            >
+              Empowering Inteligent Investors
             </p>
           </div>
         </div>
