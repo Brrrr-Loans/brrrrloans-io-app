@@ -11,17 +11,12 @@ interface SignInLayoutProps {
 export function SignInLayout({ children }: SignInLayoutProps) {
   return (
     <div className="bg-background min-h-screen relative">
-      {/* Global Theme Dropdown - positioned absolutely over entire layout */}
-      <div className="absolute top-4 right-4 z-50">
-        <ThemeDropdown />
-      </div>
-
       {/* Main content area with right column positioned */}
       <div className="md:pr-[498px]">
         {/* Left side: Sign-in form */}
         <div className="relative items-center justify-center px-6 py-24 md:flex min-h-screen">
-          {/* Logo */}
-          <div className="absolute top-4 left-4 z-50">
+          {/* Header with Logo and Theme Toggle */}
+          <div className="absolute top-4 left-4 right-4 z-50 flex items-center justify-between">
             <a
               href="/dashboard"
               aria-label="Go to dashboard"
@@ -44,6 +39,7 @@ export function SignInLayout({ children }: SignInLayoutProps) {
                 />
               </div>
             </a>
+            <ThemeDropdown />
           </div>
 
           {/* Sign-in form container */}
@@ -70,15 +66,15 @@ export function SignInLayout({ children }: SignInLayoutProps) {
               height="52"
               className="max-w-[80%]"
             />
-            <p 
+            <p
               className="text-center mt-6"
               style={{
-                color: '#FFF',
-                fontFamily: 'Inter',
-                fontSize: '12px',
-                fontStyle: 'normal',
+                color: "#FFF",
+                fontFamily: "Inter",
+                fontSize: "12px",
+                fontStyle: "normal",
                 fontWeight: 500,
-                lineHeight: 'normal'
+                lineHeight: "normal",
               }}
             >
               Empowering Inteligent Investors
