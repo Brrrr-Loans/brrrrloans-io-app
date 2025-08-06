@@ -70,7 +70,7 @@ export function SignUpLayout({ children }: SignUpLayoutProps) {
               height="52"
               className="max-w-[80%]"
             />
-            <p className="text-white text-lg font-medium mt-6 text-center">
+            <p className="text-white text-base font-medium mt-6 text-center">
               Empowering Intelligent Investors
             </p>
           </div>
