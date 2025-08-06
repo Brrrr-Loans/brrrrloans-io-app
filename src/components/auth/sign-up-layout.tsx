@@ -17,7 +17,7 @@ export function SignUpLayout({ children }: SignUpLayoutProps) {
       </div>
 
       {/* Left side: Sign-up form */}
-      <div className="relative items-center justify-center px-6 py-24 md:flex md:w-2/5">
+      <div className="relative items-center justify-center px-6 py-24 md:flex md:flex-1">
         {/* Logo */}
         <div className="absolute top-4 left-4 z-50">
           <a
@@ -48,15 +48,17 @@ export function SignUpLayout({ children }: SignUpLayoutProps) {
         <div className="m-auto w-full max-w-sm">{children}</div>
       </div>
 
-      {/* Right side: Image */}
-      <div className="hidden bg-muted md:flex md:w-3/5 md:items-center md:justify-center md:p-8">
-        <Image
-          src="https://ui.shadcn.com/placeholder.svg"
-          alt="Image"
-          width="1800"
-          height="1800"
-          className="rounded-lg object-cover max-h-full"
-        />
+      {/* Right side: Image - Fixed width */}
+      <div className="hidden bg-muted md:block md:w-96">
+        <div className="h-screen p-8 flex items-center justify-center">
+          <Image
+            src="https://ui.shadcn.com/placeholder.svg"
+            alt="Image"
+            width="1800"
+            height="1800"
+            className="rounded-lg object-cover w-full h-full max-w-none"
+          />
+        </div>
       </div>
     </div>
   );
