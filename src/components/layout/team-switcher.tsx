@@ -19,19 +19,67 @@ export function TeamSwitcher() {
             hidePersonal
             appearance={{
               elements: {
-                organizationSwitcherTrigger:
-                  "flex items-center w-full h-full p-0 border-0 bg-transparent hover:bg-transparent focus:bg-transparent rounded-md transition-colors after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:w-4 after:h-4 after:bg-current after:opacity-70 after:[mask-image:url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAxNSAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0ibTQuNSA2IDMgMyAzLTMiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEiLz4KPHBhdGggZD0ibTQuNSA5IDMtMyAzIDMiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEiLz4KPC9zdmc+')] after:[mask-repeat:no-repeat] after:[mask-position:center]",
-                organizationSwitcherTriggerIcon: "hidden",
-                organizationPreview: "flex items-center w-full relative",
-                organizationPreviewAvatarBox:
-                  "size-8 rounded-lg flex items-center justify-center bg-sidebar-primary text-sidebar-primary-foreground shrink-0",
-                organizationPreviewAvatarImage: "size-8 rounded-lg",
-                organizationPreviewMainIdentifier:
-                  "grid flex-1 text-left ml-2 pr-6",
-                organizationPreviewPrimaryIdentifier:
-                  "truncate text-sm font-medium",
-                organizationPreviewSecondaryIdentifier:
-                  "truncate text-xs text-muted-foreground",
+                organizationSwitcherTrigger: {
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "100%",
+                  padding: "0",
+                  border: "0",
+                  backgroundColor: "transparent",
+                  "&:hover": {
+                    backgroundColor: "transparent",
+                  },
+                  "&:focus": {
+                    backgroundColor: "transparent",
+                  },
+                  borderRadius: "6px",
+                  transition: "colors",
+                },
+                organizationSwitcherTriggerIcon: {
+                  marginLeft: "auto",
+                  width: "16px",
+                  height: "16px",
+                },
+                organizationPreview: {
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100%",
+                  gap: "8px",
+                },
+                organizationPreviewAvatarBox: {
+                  width: "32px",
+                  height: "32px",
+                  borderRadius: "8px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: "0",
+                },
+                organizationPreviewAvatarImage: {
+                  width: "32px",
+                  height: "32px",
+                  borderRadius: "8px",
+                },
+                organizationPreviewMainIdentifier: {
+                  display: "grid",
+                  flex: "1",
+                  textAlign: "left",
+                },
+                organizationPreviewPrimaryIdentifier: {
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                },
+                organizationPreviewSecondaryIdentifier: {
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  fontSize: "12px",
+                  color: "hsl(var(--muted-foreground))",
+                },
               },
             }}
             createOrganizationMode="modal"
