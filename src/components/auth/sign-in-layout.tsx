@@ -48,8 +48,8 @@ export function SignInLayout({ children }: SignInLayoutProps) {
         <div className="m-auto w-full max-w-sm">{children}</div>
       </div>
 
-      {/* Right side: Image - Fixed width */}
-      <div className="hidden bg-muted md:block md:w-96">
+      {/* Right side: Image - Fixed width to match Moov.io */}
+      <div className="hidden bg-muted md:block md:w-[480px]">
         <div className="h-screen p-8 flex items-center justify-center">
           <Image
             src="https://ui.shadcn.com/placeholder.svg"
