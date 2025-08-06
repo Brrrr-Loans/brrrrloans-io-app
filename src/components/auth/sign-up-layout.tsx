@@ -61,8 +61,8 @@ export function SignUpLayout({ children }: SignUpLayoutProps) {
             height="245"
             className="rounded-lg object-cover w-full h-full"
           />
-          {/* BRRRR Logo positioned on top of gradient */}
-          <div className="absolute inset-0 flex items-center justify-center">
+          {/* BRRRR Logo and tagline positioned on top of gradient */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
             <Image
               src="/logos/brrrr-mark-white.svg"
               alt="BRRRR Logo"
@@ -70,6 +70,9 @@ export function SignUpLayout({ children }: SignUpLayoutProps) {
               height="52"
               className="max-w-[80%]"
             />
+            <p className="text-white text-lg font-medium mt-6 text-center">
+              Empowering Intelligent Investors
+            </p>
           </div>
         </div>
       </aside>
