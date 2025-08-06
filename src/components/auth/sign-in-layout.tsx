@@ -62,22 +62,22 @@ export function SignInLayout({ children }: SignInLayoutProps) {
             <Image
               src="/logos/brrrr-mark-white.svg"
               alt="BRRRR Logo"
-              width="300"
-              height="52"
-              className="max-w-[80%]"
+              width="324"
+              height="56"
+              className="max-w-[72%]"
             />
             <p
               className="text-center mt-6"
               style={{
                 color: "#FFF",
                 fontFamily: "Inter",
-                fontSize: "12px",
+                fontSize: "14px",
                 fontStyle: "normal",
-                fontWeight: 500,
+                fontWeight: 400,
                 lineHeight: "normal",
               }}
             >
-              Empowering Inteligent Investors
+              Empowering Intelligent Investors
             </p>
           </div>
         </div>
