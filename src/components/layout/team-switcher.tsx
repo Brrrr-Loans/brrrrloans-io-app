@@ -1,122 +1,112 @@
 "use client";
 
-import * as React from "react";
-import { ChevronsUpDown, Building2 } from "lucide-react";
-import { useOrganization, useOrganizationList } from "@clerk/nextjs";
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { OrganizationSwitcher } from "@/components/auth/clerk-components";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/ui/sidebar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function TeamSwitcher() {
-  const { isMobile } = useSidebar();
-  const { organization } = useOrganization();
-  const { userMemberships, setActive, createOrganization } = useOrganizationList();
-
-  const activeOrganization = organization || userMemberships?.data?.[0]?.organization;
-
-  if (!activeOrganization) {
-    return (
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <SidebarMenuButton
-            size="lg"
-            className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            onClick={() => createOrganization()}
-          >
-            <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-              <Building2 className="size-4" />
-            </div>
-            <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-medium">Create Organization</span>
-              <span className="truncate text-xs">Get started</span>
-            </div>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarMenu>
-    );
-  }
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <Avatar className="size-8 rounded-lg">
-                <AvatarImage src={activeOrganization.imageUrl} alt={activeOrganization.name} />
-                <AvatarFallback className="rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  {activeOrganization.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")
-                    .toUpperCase() || "O"}
-                </AvatarFallback>
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{activeOrganization.name}</span>
-                <span className="truncate text-xs">
-                  {userMemberships?.data?.find(m => m.organization.id === activeOrganization.id)?.role || "Member"}
-                </span>
-              </div>
-              <ChevronsUpDown className="ml-auto" />
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            align="start"
-            side={isMobile ? "bottom" : "right"}
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="text-xs text-muted-foreground">
-              Organizations
-            </DropdownMenuLabel>
-            {userMemberships?.data?.map((membership, index) => (
-              <DropdownMenuItem
-                key={membership.organization.id}
-                onClick={() => setActive({ organization: membership.organization })}
-                className="gap-2 p-2"
-              >
-                <Avatar className="size-6 rounded-md">
-                  <AvatarImage src={membership.organization.imageUrl} alt={membership.organization.name} />
-                  <AvatarFallback className="rounded-md text-xs">
-                    {membership.organization.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")
-                      .toUpperCase() || "O"}
-                  </AvatarFallback>
-                </Avatar>
-                {membership.organization.name}
-              </DropdownMenuItem>
-            ))}
-            <DropdownMenuSeparator />
-            <DropdownMenuItem 
-              className="gap-2 p-2"
-              onClick={() => createOrganization()}
-            >
-              <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
-                <Building2 className="size-4" />
-              </div>
-              <div className="font-medium text-muted-foreground">Create organization</div>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <SidebarMenuButton
+          size="lg"
+          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground h-12 p-0"
+        >
+          <OrganizationSwitcher
+            hidePersonal
+            appearance={{
+              elements: {
+                // Main trigger button - matches official shadcn/ui TeamSwitcher
+                organizationSwitcherTrigger: {
+                  display: "flex",
+                  width: "100%",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  overflow: "hidden",
+                  borderRadius: "0.375rem",
+                  padding: "0.5rem",
+                  textAlign: "left",
+                  fontSize: "0.875rem",
+                  outline: "none",
+                  transition: "all",
+                  border: "none",
+                  backgroundColor: "transparent",
+                  ":hover": {
+                    backgroundColor: "hsl(var(--sidebar-accent))",
+                    color: "hsl(var(--sidebar-accent-foreground))",
+                  },
+                  ":focus-visible": {
+                    ring: "2px solid hsl(var(--sidebar-ring))",
+                  },
+                  '[data-state="open"]': {
+                    backgroundColor: "hsl(var(--sidebar-accent))",
+                    color: "hsl(var(--sidebar-accent-foreground))",
+                  },
+                  height: "3rem", // h-12
+                },
+                
+                // Organization avatar - matches shadcn/ui pattern
+                organizationPreviewAvatarBox: {
+                  backgroundColor: "hsl(var(--sidebar-primary))",
+                  color: "hsl(var(--sidebar-primary-foreground))",
+                  display: "flex",
+                  aspectRatio: "1",
+                  width: "2rem", // size-8
+                  height: "2rem", // size-8
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "0.5rem", // rounded-lg
+                  flexShrink: "0",
+                },
+                
+                // Text container - matches NavUser grid layout
+                organizationPreviewMainIdentifier: {
+                  display: "grid",
+                  flex: "1 1 0%",
+                  textAlign: "left",
+                  fontSize: "0.875rem",
+                  lineHeight: "1.25",
+                },
+                
+                // Organization name - matches NavUser primary text
+                organizationPreviewPrimaryIdentifier: {
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  fontWeight: "500", // font-medium
+                },
+                
+                // Organization role - matches NavUser secondary text  
+                organizationPreviewSecondaryIdentifier: {
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  fontSize: "0.75rem", // text-xs
+                  color: "hsl(var(--muted-foreground))",
+                },
+                
+                // Chevron icon - matches NavUser positioning
+                organizationSwitcherTriggerIcon: {
+                  marginLeft: "auto",
+                  width: "1rem", // size-4
+                  height: "1rem", // size-4
+                },
+                
+                // Dropdown content styling
+                organizationSwitcherPopoverContent: {
+                  width: "var(--radix-dropdown-menu-trigger-width)",
+                  minWidth: "14rem", // min-w-56
+                  borderRadius: "0.5rem", // rounded-lg
+                },
+              },
+            }}
+            createOrganizationMode="modal"
+            organizationProfileMode="modal"
+          />
+        </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
   );
