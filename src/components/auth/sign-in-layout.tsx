@@ -53,7 +53,7 @@ export function SignInLayout({ children }: SignInLayoutProps) {
 
       {/* Right side: Sticky positioned column - matches Moov.io exactly */}
       <aside className="hidden md:block fixed top-0 right-0 w-[498px] h-screen bg-background">
-        <div className="h-full p-6 flex items-center justify-center">
+        <div className="h-full p-6 flex items-center justify-center relative">
           <Image
             src="/assets/brand-gradient.svg"
             alt="Brand Gradient"
@@ -61,6 +61,16 @@ export function SignInLayout({ children }: SignInLayoutProps) {
             height="245"
             className="rounded-lg object-cover w-full h-full"
           />
+          {/* BRRRR Logo positioned on top of gradient */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Image
+              src="/logos/brrrr-mark-white.svg"
+              alt="BRRRR Logo"
+              width="300"
+              height="52"
+              className="max-w-[80%]"
+            />
+          </div>
         </div>
       </aside>
     </div>
