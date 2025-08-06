@@ -53,7 +53,7 @@ export function SignUpLayout({ children }: SignUpLayoutProps) {
 
       {/* Right side: Sticky positioned column - matches Moov.io exactly */}
       <aside className="hidden md:block fixed top-0 right-0 w-[498px] h-screen bg-muted">
-        <div className="h-full p-8 flex items-center justify-center">
+        <div className="h-full py-16 flex items-center justify-center">
           <Image
             src="https://ui.shadcn.com/placeholder.svg"
             alt="Image"
