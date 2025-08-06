@@ -1,36 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="450" height="245" viewBox="0 0 450 245" fill="none">
-  <!-- Gradient Background -->
   <path d="M0 0H450V245H0V0Z" fill="url(#paint0_radial_792_29)"/>
-  
-  <!-- BRRRR Logo Mark - Scaled and Centered -->
-  <g transform="translate(100, 70) scale(0.25)">
-    <!-- B Circle -->
-    <circle cx="56.25" cy="56.25" r="56.25" stroke="white" stroke-width="4.5" fill="none"/>
-    <text x="56.25" y="75" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="48" font-weight="bold">B</text>
-    
-    <!-- R Circle 1 -->
-    <circle cx="168.75" cy="56.25" r="56.25" stroke="white" stroke-width="4.5" fill="none"/>
-    <text x="168.75" y="75" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="48" font-weight="bold">R</text>
-    
-    <!-- R Circle 2 -->
-    <circle cx="281.25" cy="56.25" r="56.25" stroke="white" stroke-width="4.5" fill="none"/>
-    <text x="281.25" y="75" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="48" font-weight="bold">R</text>
-    
-    <!-- R Circle 3 -->
-    <circle cx="393.75" cy="56.25" r="56.25" stroke="white" stroke-width="4.5" fill="none"/>
-    <text x="393.75" y="75" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="48" font-weight="bold">R</text>
-    
-    <!-- R Circle 4 (Reversed) -->
-    <circle cx="506.25" cy="56.25" r="56.25" stroke="white" stroke-width="4.5" fill="none"/>
-    <text x="506.25" y="75" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="48" font-weight="bold">R</text>
-  </g>
-  
-  <!-- Trademark Symbol -->
-  <text x="390" y="90" fill="white" font-family="Arial, sans-serif" font-size="12">®</text>
-  
-  <!-- Tagline Text -->
-  <text x="225" y="190" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="500">Empowering Intelligent Investors</text>
-  
   <defs>
     <radialGradient id="paint0_radial_792_29" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-78.75 -44.5454) rotate(28.3543) scale(609.67 354.059)">
       <stop offset="0.243407" stop-color="#F72121"/>
