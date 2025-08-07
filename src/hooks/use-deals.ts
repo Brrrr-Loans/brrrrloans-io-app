@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { Tables } from "@/types/supabase";
 
-type Deal = Tables<"deal">;
+type Deal = Tables<"bsi_deals"> & { deal: Tables<"deal"> };
 
 export interface UseDealsOptions {
   status?: string;

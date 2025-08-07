@@ -1,0 +1,9 @@
+{
+  "framework": "nextjs",
+  "env": {
+    "NEXT_PUBLIC_CLERK_FRONTEND_API": "joint-reptile-94.clerk.accounts.dev",
+    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_am9pbnQtcmVwdGlsZS05NC5jbGVyay5hY2NvdW50cy5kZXYk",
+    "NEXT_PUBLIC_SUPABASE_URL": "https://api.app.brrrrloans.com",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzeGdndHNncXNraGNoY2JybWhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDc1MTY5NTYsImV4cCI6MjAyMzA5Mjk1Nn0.7rz-RWScKJEYFPg6U2ihfxdCmOj4DEhHPLq12XXS-Bc"
+  }
+}

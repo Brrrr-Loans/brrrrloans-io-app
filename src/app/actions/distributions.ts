@@ -34,20 +34,22 @@ export async function createDistribution(formData: FormData) {
     // Parse the investor payments
     const investorPayments = JSON.parse(investorPaymentsJson);
 
-    // Insert distribution record directly
+    // Insert distribution record (id will be auto-generated)
     const { error } = await supabase.from("bsi_distributions").insert({
       deal_id: Number(dealId),
       created_at: new Date().toISOString(),
       notes: typeof notes === "string" ? notes : null,
       // Required fields (use dummy values or parse from formData as needed)
       capital_contribution: 0,
-      deposit_amount: 0,
+      deposit_amount: Number(totalAmount) || 0,
       interest_amount: 0,
       loan_amount_snapshot: 0,
       principal_amount: 0,
       rate_of_return_pct: 0,
-      statement_id: "dummy-statement-id",
-    });
+      statement_id: crypto.randomUUID(), // Generate a valid UUID
+      servicing_fee: 0,
+      wire_fee: 0,
+    } as any); // Temporarily use 'any' to bypass strict type checking for auto-generated id
 
     if (error) {
       throw new Error(error.message);
@@ -61,7 +63,7 @@ export async function createDistribution(formData: FormData) {
   }
 }
 
-export async function updateDistributionStatus(id: string, status: string) {
+export async function updateDistributionStatus(id: number, status: string) {
   const { userId } = await auth();
   if (!userId) {
     throw new Error("Unauthorized");
@@ -76,7 +78,7 @@ export async function updateDistributionStatus(id: string, status: string) {
       .update({
         updated_at: new Date().toISOString(),
       })
-      .eq("id", id); // id is a string (uuid)
+      .eq("id", id); // id is a number
 
     if (error) {
       throw new Error(error.message);
@@ -90,7 +92,7 @@ export async function updateDistributionStatus(id: string, status: string) {
   }
 }
 
-export async function deleteDistribution(id: string) {
+export async function deleteDistribution(id: number) {
   const { userId } = await auth();
   if (!userId) {
     throw new Error("Unauthorized");

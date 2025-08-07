@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { BuilderInit } from "@/components/builder/builder-init";
 
 export function RootLayoutClient({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -22,5 +23,10 @@ export function RootLayoutClient({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  return children;
+  return (
+    <>
+      <BuilderInit />
+      {children}
+    </>
+  );
 }

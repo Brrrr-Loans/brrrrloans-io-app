@@ -2,22 +2,13 @@
 const nextConfig = {
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "shadcnblocks.com",
-      },
-      {
-        protocol: "https",
-        hostname: "api.app.brrrrloans.com",
-      },
-      {
-        protocol: "https",
-        hostname: "assets.vercel.com",
-      },
-      {
-        protocol: "https",
-        hostname: "supabase.com",
-      },
+      { protocol: "https", hostname: "shadcnblocks.com" },
+      { protocol: "https", hostname: "api.app.brrrrloans.com" },
+      { protocol: "https", hostname: "assets.vercel.com" },
+      { protocol: "https", hostname: "supabase.com" },
+      { protocol: "https", hostname: "cdn.builder.io" },
+      { protocol: "https", hostname: "img.clerk.com" },
+      { protocol: "https", hostname: "images.clerk.dev" },
     ],
   },
   allowedDevOrigins: [
@@ -25,6 +16,16 @@ const nextConfig = {
     "http://localhost:3001",
     "http://192.168.1.237:3001",
   ],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

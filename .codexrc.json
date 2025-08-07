@@ -1,0 +1,90 @@
+{
+  "projectName": "brrrrloans-io-os",
+  "description": "A multi-tenant real estate lending app built with Next.js, Clerk for user management, Supabase for backend and file storage, and Shadcn UI components for frontend styling. Codebase managed in GitHub and developed in Cursor.",
+  "technologies": [
+    "Next.js (App Router)",
+    "TypeScript",
+    "Clerk (multi-tenant auth)",
+    "Supabase (DB + Storage)",
+    "Shadcn UI + Tailwind CSS",
+    "React Charts",
+    "Zod (validation)",
+    "PostgreSQL with RLS",
+    "GitHub CI/CD",
+    "Cursor IDE"
+  ],
+  "setup": {
+    "commands": ["corepack enable", "pnpm install --frozen-lockfile"],
+    "timeoutMinutes": 10
+  },
+  "instructions": {
+    "ui": {
+      "componentLibrary": "shadcn",
+      "styling": "tailwind",
+      "rules": [
+        "Use Shadcn New York Zinc v4 components and themes",
+        "All components must support dark/light mode",
+        "Use Tailwind breakpoints and spacing consistently",
+        "Organize components under `src/components` by domain",
+        "Use `cn()` for conditional styling, not string templates"
+      ]
+    },
+    "supabase": {
+      "auth": "Clerk JWT-based auth",
+      "rules": [
+        "Use `auth()` from `@clerk/nextjs/server` to get the user",
+        "Link Clerk users to `auth_user_profile` rows in Supabase",
+        "All queries must be scoped by `org_id` and `user_id`",
+        "Use RLS to restrict access to rows and buckets",
+        "Only use `service_role` server-side; never expose it client-side"
+      ],
+      "buckets": {
+        "structure": "orgs/{org_id}/user_{user_id}/[path]",
+        "access": "Use signed URLs with expirations",
+        "upload/download": "Use Supabase JS client with error handling"
+      }
+    },
+    "testing": {
+      "tools": [
+        "Vitest",
+        "@testing-library/react",
+        "Supabase CLI test environment"
+      ],
+      "testCases": [
+        "Admin vs. read-only user access",
+        "Unauthenticated user restrictions",
+        "RLS enforcement across orgs",
+        "Signed URL expiration and scope"
+      ]
+    },
+    "taskWorkflow": {
+      "onReviewRequest": [
+        "Scan for auth + RLS violations",
+        "Check bucket access security",
+        "Confirm component structure and props",
+        "Run test suite",
+        "Generate suggestions or refactor PR"
+      ],
+      "onBugFixRequest": [
+        "Reproduce issue in isolated environment",
+        "Trace Supabase and Clerk session usage",
+        "Confirm DB writes respect user/org scope",
+        "Write failing test, fix code, retest"
+      ],
+      "onFeatureRequest": [
+        "Create typed Zod schema for validation",
+        "Build UI using Shadcn",
+        "Integrate with Supabase using scoped access",
+        "Test end-to-end flows"
+      ]
+    }
+  },
+  "defaultEntryPoints": {
+    "ui": "src/components/",
+    "routes": "src/app/",
+    "api": "src/app/api/",
+    "database": "supabase/schema.sql or schema/tables/",
+    "storage": "supabase/storage/",
+    "auth": "middleware.ts, clerk.ts, lib/auth.ts"
+  }
+}

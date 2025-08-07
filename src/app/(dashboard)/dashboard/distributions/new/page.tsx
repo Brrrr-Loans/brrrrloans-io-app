@@ -7,7 +7,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui";
 import { CreateDistributionForm } from "@/components/distributions/create-distribution-form";
 
 export default function NewDistributionPage() {

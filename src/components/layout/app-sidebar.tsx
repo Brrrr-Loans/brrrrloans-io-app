@@ -1,12 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { OrganizationSwitcher } from "@/components/auth/clerk-components";
 import { usePathname } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 import {
   Building,
   Home,
-  Files,
   FileBarChart2,
   LineChart,
   CircleDollarSign,
@@ -15,23 +14,20 @@ import { NavAI } from "./nav-ai";
 import { NavMain } from "./nav-main";
 import { NavDocuments } from "./nav-documents";
 import { NavUser } from "./nav-user";
+import { TeamSwitcherV2 } from "./team-switcher-v2";
 
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarRail,
-  SidebarSeparator,
-} from "@/components/ui/sidebar";
+} from "@/components/ui/layout/sidebar";
 
 export function AppSidebar(
   props: React.ComponentPropsWithoutRef<typeof Sidebar>
 ) {
   const pathname = usePathname();
+  const { user } = useUser();
 
   const mainNavItems = [
     {
@@ -67,60 +63,32 @@ export function AppSidebar(
     },
   ];
 
+  // Prepare user data for NavUser component
+  const userData = user
+    ? {
+        name: user.fullName || user.firstName || "User",
+        email: user.primaryEmailAddress?.emailAddress || "user@example.com",
+        avatar: user.imageUrl || "/default-avatar.png",
+      }
+    : {
+        name: "Loading...",
+        email: "",
+        avatar: "/default-avatar.png",
+      };
+
   return (
-    <Sidebar
-      collapsible="offcanvas"
-      variant="inset"
-      className="h-screen w-64 min-w-[16rem] flex-shrink-0"
-      {...props}
-    >
+    <Sidebar collapsible="offcanvas" variant="inset" {...props}>
       <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <OrganizationSwitcher
-                appearance={{
-                  elements: {
-                    organizationSwitcherTrigger:
-                      "flex items-center gap-2 w-full h-full p-0 border-0 bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent justify-start",
-                    organizationPreview:
-                      "flex items-center gap-2 w-full justify-start",
-                    organizationSwitcherTriggerIcon: "hidden",
-                    organizationSwitcherPopoverCard:
-                      "w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg",
-                    organizationPreviewAvatarBox:
-                      "h-8 w-8 rounded-lg shrink-0 order-first",
-                    organizationPreviewAvatarImage:
-                      "aspect-square h-full w-full rounded-lg",
-                    organizationPreviewMainIdentifier:
-                      "grid flex-1 text-left text-sm leading-tight ml-2",
-                    organizationPreviewTextContainer:
-                      "truncate font-semibold text-left",
-                    organizationPreviewSecondaryIdentifier:
-                      "truncate text-xs text-muted-foreground text-left",
-                  },
-                }}
-              />
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <TeamSwitcherV2 />
       </SidebarHeader>
-
-      <SidebarSeparator />
-
       <SidebarContent>
         <NavAI />
         <NavMain items={mainNavItems} />
         <NavDocuments items={documentItems} />
       </SidebarContent>
-
       <SidebarFooter>
-        <NavUser />
+        <NavUser user={userData} />
       </SidebarFooter>
-      <SidebarRail />
     </Sidebar>
   );
 }

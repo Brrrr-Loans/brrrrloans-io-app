@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useInvestorPermissions } from "@/hooks/use-investor-permissions";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui";
 
 interface WithInvestorPermissionProps {
   resourceType: "deal" | "document" | "contribution" | "distribution";

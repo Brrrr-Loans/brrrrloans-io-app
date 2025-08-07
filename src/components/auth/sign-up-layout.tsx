@@ -1,9 +1,7 @@
 "use client";
 
-import * as motion from "motion/react-client";
 import Image from "next/image";
 import { ReactNode } from "react";
-import { AuthCarousel } from "@/components/auth/auth-carousel";
 import { ThemeDropdown } from "@/components/theme/theme-dropdown";
 
 interface SignUpLayoutProps {
@@ -12,27 +10,78 @@ interface SignUpLayoutProps {
 
 export function SignUpLayout({ children }: SignUpLayoutProps) {
   return (
-    <div className="relative grid min-h-screen grid-cols-1 overflow-hidden md:grid-cols-2 lg:grid-cols-12">
-      <div className="relative col-span-1 flex flex-col justify-center px-5 pt-8 md:col-span-1 md:px-6 lg:col-span-5 lg:px-8">
-        <div className="absolute left-5 top-8 md:left-6 lg:left-8">
+    <div className="bg-background min-h-screen relative">
+      {/* Logo and theme toggle grouped in top-left */}
+      <div className="absolute top-4 left-4 z-50 flex items-center gap-3">
+        <a
+          href="/dashboard"
+          aria-label="Go to dashboard"
+          className="flex items-center gap-2 font-medium"
+        >
+          <div className="flex h-8 w-8 items-center justify-center">
+            <Image
+              src="/logos/brrrr-icon-sq-gradient-black-2.svg"
+              alt="Brrrr Loans Logo Light Mode"
+              width={32}
+              height={32}
+              className="block dark:hidden"
+            />
+            <Image
+              src="/logos/brrrr-icon-sq-gradient-white-2.svg"
+              alt="Brrrr Loans Logo Dark Mode"
+              width={32}
+              height={32}
+              className="hidden dark:block"
+            />
+          </div>
+        </a>
+        <ThemeDropdown />
+      </div>
+
+      {/* Main content area with right column positioned */}
+      <div className="md:pr-[498px]">
+        {/* Left side: Sign-up form */}
+        <div className="relative items-center justify-center px-6 py-24 md:flex min-h-screen">
+          {/* Sign-up form container */}
+          <div className="m-auto w-full max-w-sm">{children}</div>
+        </div>
+      </div>
+
+      {/* Right side: Sticky positioned column - matches Moov.io exactly */}
+      <aside className="hidden md:block fixed top-0 right-0 w-[498px] h-screen bg-background">
+        <div className="h-full p-6 flex items-center justify-center relative">
           <Image
-            src="/logos/bl-logo.png"
-            alt="Logo"
-            width={40}
-            height={40}
-            className="h-10 w-auto"
+            src="/assets/brand-gradient.svg"
+            alt="Brand Gradient"
+            width="450"
+            height="245"
+            className="rounded-lg object-cover w-full h-full"
           />
+          {/* BRRRR Logo and tagline positioned on top of gradient */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <Image
+              src="/logos/brrrr-mark-white.svg"
+              alt="BRRRR Logo"
+              width="324"
+              height="56"
+              className="max-w-[72%]"
+            />
+            <p
+              className="text-center mt-6"
+              style={{
+                color: "#FFF",
+                fontFamily: "Inter",
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
+              }}
+            >
+              Empowering Intelligent Investors
+            </p>
+          </div>
         </div>
-        <div className="absolute right-5 top-8 md:right-6 lg:right-8">
-          <ThemeDropdown />
-        </div>
-        <div className="mx-auto mt-16 w-full max-w-sm sm:mt-20 md:mt-24 lg:mr-0 lg:mt-20">
-          {children}
-        </div>
-      </div>
-      <div className="hidden bg-muted md:block md:col-span-1 lg:col-span-7">
-        <AuthCarousel />
-      </div>
+      </aside>
     </div>
   );
 }

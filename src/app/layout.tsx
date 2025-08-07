@@ -8,10 +8,10 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme/theme-provider";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/feedback/sonner";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { RootLayoutClient } from "@/components/layout";
+import { RootLayoutClient } from "@/components/layout/root-layout-client";
 
 const inter = Inter({ subsets: ["latin"] });
 

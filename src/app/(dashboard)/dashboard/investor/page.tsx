@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui";
 import { InvestorDashboardSkeleton } from "@/components/skeletons/investor-dashboard-skeleton";
 import { PermissionErrorBoundary } from "@/components/error-boundary/permission-error-boundary";
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
+} from "@/components/ui";
 import {
   ResponsiveContainer,
   LineChart,
@@ -17,7 +17,7 @@ import {
   YAxis,
   CartesianGrid,
 } from "recharts";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui";
 import { DistributionsListWrapper } from "@/components/distributions/protected-distributions-list";
 import { ActiveDealsListWrapper } from "@/components/deals/active-deals-list";
 import type { Tables } from "@/types/supabase";

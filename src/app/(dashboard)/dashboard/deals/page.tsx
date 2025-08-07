@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { RouteProtection } from "@/components/auth/route-protection";
 import { SiteHeader } from "@/components/layout/site-header";
 import {
   Card,
@@ -9,7 +10,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui/layout/card";
 import {
   Table,
   TableBody,
@@ -17,17 +18,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/data/table";
+import { Badge } from "@/components/ui/feedback/badge";
+import { Button } from "@/components/ui/forms/button";
+import { Input } from "@/components/ui/forms/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/forms/select";
 import {
   Dialog,
   DialogContent,
@@ -35,13 +36,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/overlays/dialog";
 import { Eye, Download, Plus } from "lucide-react";
 import { DealDetails } from "@/components/deals/deal-details";
 import { useDeals } from "@/hooks/use-deals";
 import type { Tables } from "@/types/supabase";
 
-export default function DealsPage() {
+function DealsPageContent() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all-status");
@@ -58,7 +59,7 @@ export default function DealsPage() {
     search: searchTerm || undefined,
   });
 
-  // The API returns: (Tables<"bs_investor_deals"> & { deal?: Tables<"deal"> })[]
+  // The API returns: (Tables<"bsi_deals"> & { deal: Tables<"deal"> })[]
   // Map to a UI-friendly shape
   const deals: Array<{
     id: string | number;
@@ -68,12 +69,11 @@ export default function DealsPage() {
     roi: string;
     date: string;
     location: string;
-    investors: number;
+    investors: string;
     status: string;
-    raw: any;
+    raw: Tables<"bsi_deals"> & { deal: Tables<"deal"> };
   }> = (rawDeals || []).map((d) => {
-    const dealObj =
-      (d as { deal?: Tables<"deal">; deal_id?: number | string })?.deal ?? d;
+    const dealObj = d.deal;
     return {
       id: dealObj.id ?? "",
       name: dealObj.deal_name ?? "",
@@ -82,7 +82,7 @@ export default function DealsPage() {
       roi: dealObj.note_rate?.toString() ?? "",
       date: dealObj.created_at ?? "",
       location: dealObj.property_id?.toString() ?? "",
-      investors: 1, // Placeholder, update if you have investor count
+      investors: "1", // Placeholder, update if you have investor count
       status: dealObj.deal_disposition_1 ?? "",
       raw: d,
     };
@@ -91,60 +91,60 @@ export default function DealsPage() {
   return (
     <>
       <SiteHeader />
-      <div className="@container/main flex flex-1 flex-col gap-2">
-        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 px-4 lg:px-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold tracking-tight">Deals</h1>
-            <div className="flex gap-2">
-              <Button variant="outline">
-                <Download className="mr-2 h-4 w-4" />
-                Export
-              </Button>
-              <Button onClick={() => router.push("/dashboard/deals/new")}>
-                <Plus className="mr-2 h-4 w-4" />
-                New Deal
-              </Button>
-            </div>
+      <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 px-4 lg:px-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Deals</h1>
+            <p className="text-muted-foreground">
+              Manage your investment deals and track their performance.
+            </p>
           </div>
+          <Button onClick={() => router.push("/dashboard/deals/new")}>
+            <Plus className="mr-2 h-4 w-4" />
+            New Deal
+          </Button>
+        </div>
+
+        <div className="grid gap-4">
           <Card>
             <CardHeader>
-              <CardTitle>All Deals</CardTitle>
+              <CardTitle>Deal Portfolio</CardTitle>
               <CardDescription>
-                View and manage all investment deals
+                View and manage all your investment deals.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center gap-2 mb-4">
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
                 <Input
                   placeholder="Search deals..."
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="max-w-sm"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setSearchTerm(e.target.value)
+                  }
+                  className="sm:max-w-xs"
                 />
                 <Select value={selectedType} onValueChange={setSelectedType}>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Filter by type" />
+                  <SelectTrigger className="sm:max-w-xs">
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Types</SelectItem>
-                    <SelectItem value="Multi-Family">Multi-Family</SelectItem>
-                    <SelectItem value="Commercial">Commercial</SelectItem>
-                    <SelectItem value="Residential">Residential</SelectItem>
-                    <SelectItem value="Land">Land</SelectItem>
+                    <SelectItem value="dscr">DSCR</SelectItem>
+                    <SelectItem value="rtl">RTL</SelectItem>
                   </SelectContent>
                 </Select>
                 <Select
                   value={selectedStatus}
                   onValueChange={setSelectedStatus}
                 >
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Filter by status" />
+                  <SelectTrigger className="sm:max-w-xs">
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all-status">All Status</SelectItem>
-                    <SelectItem value="Active">Active</SelectItem>
-                    <SelectItem value="Pending">Pending</SelectItem>
-                    <SelectItem value="Closed">Closed</SelectItem>
+                    <SelectItem value="active">Active</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                    <SelectItem value="closed">Closed</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -183,39 +183,59 @@ export default function DealsPage() {
                       <TableRow key={deal.id}>
                         <TableCell className="font-medium">{deal.id}</TableCell>
                         <TableCell>{deal.name}</TableCell>
-                        <TableCell>{deal.type}</TableCell>
-                        <TableCell>{deal.amount}</TableCell>
-                        <TableCell>{deal.roi}</TableCell>
+                        <TableCell>
+                          <Badge variant="outline">{deal.type}</Badge>
+                        </TableCell>
+                        <TableCell>${deal.amount}</TableCell>
+                        <TableCell>{deal.roi}%</TableCell>
                         <TableCell>{deal.location}</TableCell>
                         <TableCell>{deal.investors}</TableCell>
                         <TableCell>
                           <Badge
                             variant={
-                              deal.status === "Active" ? "default" : "secondary"
+                              deal.status === "active"
+                                ? "default"
+                                : deal.status === "pending"
+                                ? "secondary"
+                                : "outline"
                             }
                           >
                             {deal.status}
                           </Badge>
                         </TableCell>
                         <TableCell className="text-right">
-                          <Dialog>
-                            <DialogTrigger asChild>
-                              <Button variant="ghost" size="icon">
-                                <Eye className="h-4 w-4" />
-                                <span className="sr-only">View details</span>
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent className="max-w-3xl">
-                              <DialogHeader>
-                                <DialogTitle>Deal Details</DialogTitle>
-                                <DialogDescription>
-                                  Comprehensive information about this
-                                  investment deal
-                                </DialogDescription>
-                              </DialogHeader>
-                              <DealDetails deal={deal.raw} />
-                            </DialogContent>
-                          </Dialog>
+                          <div className="flex justify-end gap-2">
+                            <Dialog>
+                              <DialogTrigger asChild>
+                                <Button variant="ghost" size="sm">
+                                  <Eye className="h-4 w-4" />
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent className="sm:max-w-[600px]">
+                                <DialogHeader>
+                                  <DialogTitle>Deal Details</DialogTitle>
+                                  <DialogDescription>
+                                    View comprehensive details for {deal.name}
+                                  </DialogDescription>
+                                </DialogHeader>
+                                <DealDetails
+                                  deal={{
+                                    name: deal.name,
+                                    location: deal.location,
+                                    type: deal.type,
+                                    status: deal.status,
+                                    amount: deal.amount,
+                                    roi: deal.roi,
+                                    date: deal.date,
+                                    investors: deal.investors,
+                                  }}
+                                />
+                              </DialogContent>
+                            </Dialog>
+                            <Button variant="ghost" size="sm">
+                              <Download className="h-4 w-4" />
+                            </Button>
+                          </div>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -227,5 +247,22 @@ export default function DealsPage() {
         </div>
       </div>
     </>
+  );
+}
+
+export default function DealsPage() {
+  return (
+    <RouteProtection
+      requiredContactTypes={[
+        "Balance Sheet Investor",
+        "Lender",
+        "Borrower",
+        "Broker",
+        "Point of Contact",
+      ]}
+      requiredPermissions={["canAccessDeals"]}
+    >
+      <DealsPageContent />
+    </RouteProtection>
   );
 }

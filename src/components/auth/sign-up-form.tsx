@@ -10,8 +10,8 @@ export function SignUpForm() {
   const isDark = theme === "dark";
   const appearance = isDark ? signUpDarkAppearance : signUpAppearance;
   const logoImageUrl = isDark
-    ? "/logos/brrrr-icon-sq-white-192.png"
-    : "/logos/brrrr-icon-sq-black-192.png";
+    ? "/logos/brrrr-icon-sq-gradient-white-2.svg"
+    : "/logos/brrrr-icon-sq-gradient-black-2.svg";
 
   return (
     <SignUp

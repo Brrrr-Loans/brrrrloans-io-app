@@ -45,6 +45,7 @@ const commonElementOverrides = {
   footerActionLink:
     "text-primary hover:text-primary/90 hover:underline transition-colors",
   socialButtons: "clerk-social-buttons",
+  cardBox: "shadow-sm border border-border",
 };
 
 // Tailor appearance objects for specific components
@@ -59,6 +60,16 @@ export const signInAppearance: Appearance = {
     socialButtonsBlockButton: "clerk-social-buttons-block-button",
     socialButtonsProviderIcon_github:
       "clerk-social-buttons-provider-icon-github",
+    // Apply specific classes for Google button (lines 172-177)
+    socialButtonsBlockButton__google:
+      "clerk-social-buttons-block-button[data-provider='google'] .cl-internal-icon + span::after",
+    // Apply specific classes for Github button (lines 189-194)
+    socialButtonsBlockButton__github:
+      "clerk-social-buttons-block-button[data-provider='github'] span:not([class*='icon'], [role='img'])",
+    // Form field customizations
+    formFieldLabel__emailAddress: "sr-only", // Hide email label
+    formFieldInput__emailAddress: "w-full",
+    formFieldInput__password: "w-full",
   },
 };
 
@@ -74,6 +85,16 @@ export const signInDarkAppearance: Appearance = {
     socialButtonsBlockButton: "clerk-social-buttons-block-button",
     socialButtonsProviderIcon_github:
       "clerk-social-buttons-provider-icon-github",
+    // Apply specific classes for Google button (lines 172-177)
+    socialButtonsBlockButton__google:
+      "clerk-social-buttons-block-button[data-provider='google'] .cl-internal-icon + span::after",
+    // Apply specific classes for Github button (lines 189-194)
+    socialButtonsBlockButton__github:
+      "clerk-social-buttons-block-button[data-provider='github'] span:not([class*='icon'], [role='img'])",
+    // Form field customizations
+    formFieldLabel__emailAddress: "sr-only", // Hide email label
+    formFieldInput__emailAddress: "w-full",
+    formFieldInput__password: "w-full",
   },
 };
 
