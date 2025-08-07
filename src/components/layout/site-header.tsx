@@ -1,8 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Separator } from "@/components/ui/separator";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Separator } from "@/components/ui/layout/separator";
+import { SidebarTrigger } from "@/components/ui/layout/sidebar";
 import { SearchForm } from "@/components/layout/search-form";
 import { ThemeDropdown } from "@/components/theme/theme-dropdown";
 

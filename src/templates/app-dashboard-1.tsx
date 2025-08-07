@@ -1,12 +1,16 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/forms/button";
+import { Input } from "@/components/ui/forms/input";
+import { Badge } from "@/components/ui/feedback/badge";
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+} from "@/components/ui/media/avatar";
+import { Checkbox } from "@/components/ui/forms/checkbox";
+import { Separator } from "@/components/ui/layout/separator";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,7 +18,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@/components/ui/navigation/breadcrumb";
 import {
   Table,
   TableBody,
@@ -22,7 +26,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/data/table";
 import { AreaChart, Area, XAxis, CartesianGrid } from "recharts";
 import {
   Search,
@@ -36,8 +40,8 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
-import { Calendar } from "@/components/ui/calendar";
+} from "@/components/ui/data/chart";
+import { Calendar } from "@/components/ui/forms/calendar";
 import {
   Pagination,
   PaginationContent,
@@ -46,7 +50,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "../ui/pagination";
+} from "@/components/ui/navigation/pagination";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { DateRange } from "react-day-picker";
@@ -57,7 +61,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/overlays/popover";
 
 import {
   DropdownMenu,
@@ -68,7 +72,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/overlays/dropdown-menu";
 
 import {
   Home,
@@ -87,7 +91,7 @@ import {
   SidebarRail,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from "@/components/ui/layout/sidebar";
 import { TeamSwitcher } from "@/components/layout/team-switcher";
 import { NavMain } from "@/components/layout/nav-main";
 import { NavUser } from "@/components/layout/nav-user";

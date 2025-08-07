@@ -1,48 +1,57 @@
-// Existing UI components
-export * from "./alert";
-export * from "./avatar";
-export * from "./badge";
-export * from "./breadcrumb";
-export * from "./button";
-export * from "./calendar";
-export * from "./card";
-export * from "./carousel";
-export * from "./chart";
-export * from "./checkbox";
-export * from "./data-table";
-export * from "./date-picker";
-export * from "./dialog";
-export * from "./drawer";
-export * from "./dropdown-menu";
-export * from "./dropzone";
-export * from "./form";
-export * from "./infinite-slider";
-export * from "./input";
-export * from "./label";
-export * from "./login-form";
+// Feedback components
+export * from "./feedback/alert";
+export * from "./feedback/badge";
+export * from "./feedback/progress";
+export * from "./feedback/skeleton";
+export { Toaster as SonnerToaster } from "./feedback/sonner";
+export * from "./feedback/toast";
+export * from "./feedback/toaster";
 
-export * from "./pagination";
-export * from "./popover";
-export * from "./progress";
-export * from "./progressive-blur";
-export * from "./scroll-area";
-export * from "./select";
-export * from "./separator";
-export * from "./sheet";
-export * from "./sidebar";
-export * from "./skeleton";
-export * from "./sonner";
-export * from "./table";
-export * from "./tabs";
-export * from "./textarea";
-export * from "./toast";
-export * from "./toaster";
-export * from "./toggle";
-export * from "./toggle-group";
-export * from "./tooltip";
+// Form components
+export * from "./forms/button";
+export * from "./forms/calendar";
+export * from "./forms/checkbox";
+export * from "./forms/date-picker";
+export * from "./forms/dropzone";
+export * from "./forms/form";
+export * from "./forms/input";
+export * from "./forms/label";
+export * from "./forms/login-form";
+export * from "./forms/select";
+export * from "./forms/textarea";
+export * from "./forms/toggle";
+export * from "./forms/toggle-group";
 
-// Magic UI Carousel 2 components
-export * from "./carousel-button";
-export * from "./carousel-indicator";
-export * from "./magic-carousel-2";
-export * from "./magic-carousel-2-example";
+// Layout components
+export * from "./layout/card";
+export * from "./layout/scroll-area";
+export * from "./layout/separator";
+export * from "./layout/sidebar";
+export * from "./layout/tabs";
+
+// Overlay components
+export * from "./overlays/dialog";
+export * from "./overlays/drawer";
+export * from "./overlays/dropdown-menu";
+export * from "./overlays/popover";
+export * from "./overlays/sheet";
+export * from "./overlays/tooltip";
+
+// Data components
+export * from "./data/chart";
+export * from "./data/data-table";
+export * from "./data/table";
+
+// Navigation components
+export * from "./navigation/breadcrumb";
+
+// Media components
+export * from "./media/avatar";
+export * from "./media/carousel";
+export * from "./media/carousel-button";
+export * from "./media/carousel-indicator";
+export * from "./media/infinite-slider";
+export * from "./media/magic-carousel-2";
+export * from "./media/magic-carousel-2-example";
+export * from "./media/pagination";
+export * from "./media/progressive-blur";

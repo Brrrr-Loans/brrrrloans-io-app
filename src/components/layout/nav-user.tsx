@@ -9,7 +9,11 @@ import {
 } from "lucide-react";
 import { useClerk } from "@clerk/nextjs";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/media/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,13 +22,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/overlays/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar";
+} from "@/components/ui/layout/sidebar";
 
 export function NavUser({
   user,

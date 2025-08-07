@@ -9,8 +9,13 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from "@/components/ui/layout/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/layout/tabs";
 import {
   Table,
   TableBody,
@@ -18,17 +23,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/data/table";
+import { Badge } from "@/components/ui/feedback/badge";
+import { Button } from "@/components/ui/forms/button";
+import { Input } from "@/components/ui/forms/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/forms/select";
 import { Download, Plus } from "lucide-react";
 import { InvestorSummaryWidget } from "@/components/distributions/investor-summary-widget";
 import { useDistributions } from "@/hooks/use-distributions";

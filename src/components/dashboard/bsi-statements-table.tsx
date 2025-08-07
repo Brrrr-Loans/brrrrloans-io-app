@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/layout/card";
 import {
   Table,
   TableBody,
@@ -10,12 +15,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/data/table";
+import { Button } from "@/components/ui";
 import { Download, FileText } from "lucide-react";
 import { format } from "date-fns";
 import type { InvestorStatement } from "@/types/investor-statements";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/feedback/skeleton";
 
 interface InvestorStatementsListProps {
   investorId?: number;

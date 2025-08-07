@@ -5,7 +5,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "@/components/ui";
 
 export function TeamSwitcher() {
   return (
@@ -13,7 +13,7 @@ export function TeamSwitcher() {
       <SidebarMenuItem>
         <SidebarMenuButton
           size="lg"
-          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground h-12 p-0"
+          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground h-12"
         >
           <OrganizationSwitcher
             hidePersonal
@@ -42,12 +42,13 @@ export function TeamSwitcher() {
                     ring: "2px solid hsl(var(--sidebar-ring))",
                   },
                   '[data-state="open"]': {
+                    ring: "2px solid hsl(var(--sidebar-ring))",
                     backgroundColor: "hsl(var(--sidebar-accent))",
                     color: "hsl(var(--sidebar-accent-foreground))",
                   },
                   height: "3rem", // h-12
                 },
-                
+
                 // Organization avatar - matches shadcn/ui pattern
                 organizationPreviewAvatarBox: {
                   backgroundColor: "hsl(var(--sidebar-primary))",
@@ -61,7 +62,7 @@ export function TeamSwitcher() {
                   borderRadius: "0.5rem", // rounded-lg
                   flexShrink: "0",
                 },
-                
+
                 // Text container - matches NavUser grid layout
                 organizationPreviewMainIdentifier: {
                   display: "grid",
@@ -70,7 +71,7 @@ export function TeamSwitcher() {
                   fontSize: "0.875rem",
                   lineHeight: "1.25",
                 },
-                
+
                 // Organization name - matches NavUser primary text
                 organizationPreviewPrimaryIdentifier: {
                   overflow: "hidden",
@@ -78,8 +79,8 @@ export function TeamSwitcher() {
                   whiteSpace: "nowrap",
                   fontWeight: "500", // font-medium
                 },
-                
-                // Organization role - matches NavUser secondary text  
+
+                // Organization role - matches NavUser secondary text
                 organizationPreviewSecondaryIdentifier: {
                   overflow: "hidden",
                   textOverflow: "ellipsis",
@@ -87,14 +88,14 @@ export function TeamSwitcher() {
                   fontSize: "0.75rem", // text-xs
                   color: "hsl(var(--muted-foreground))",
                 },
-                
+
                 // Chevron icon - matches NavUser positioning
                 organizationSwitcherTriggerIcon: {
                   marginLeft: "auto",
                   width: "1rem", // size-4
                   height: "1rem", // size-4
                 },
-                
+
                 // Dropdown content styling
                 organizationSwitcherPopoverContent: {
                   width: "var(--radix-dropdown-menu-trigger-width)",

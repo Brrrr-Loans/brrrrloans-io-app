@@ -8,7 +8,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "@/components/ui/layout/sidebar";
 
 export function NavAI() {
   return (
@@ -18,10 +18,10 @@ export function NavAI() {
           <SidebarMenuItem>
             <SidebarMenuButton
               tooltip="Ask AI"
-              className="rounded-md bg-primary text-white hover:bg-primary/90 hover:text-white active:bg-primary/90 active:text-white dark:text-black dark:hover:text-black dark:active:text-black min-w-8 duration-200 ease-linear"
+              className="rounded-md bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
             >
               <OpenAIIcon size={20} />
-              <span>Ask AI</span>
+              <span className="text-primary-background">Ask AI</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

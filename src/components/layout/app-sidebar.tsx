@@ -14,14 +14,14 @@ import { NavAI } from "./nav-ai";
 import { NavMain } from "./nav-main";
 import { NavDocuments } from "./nav-documents";
 import { NavUser } from "./nav-user";
-import { TeamSwitcher } from "./team-switcher";
+import { TeamSwitcherV2 } from "./team-switcher-v2";
 
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-} from "@/components/ui/sidebar";
+} from "@/components/ui/layout/sidebar";
 
 export function AppSidebar(
   props: React.ComponentPropsWithoutRef<typeof Sidebar>
@@ -79,7 +79,7 @@ export function AppSidebar(
   return (
     <Sidebar collapsible="offcanvas" variant="inset" {...props}>
       <SidebarHeader>
-        <TeamSwitcher />
+        <TeamSwitcherV2 />
       </SidebarHeader>
       <SidebarContent>
         <NavAI />

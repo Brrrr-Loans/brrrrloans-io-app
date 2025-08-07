@@ -3,7 +3,12 @@
 import { useState, useEffect } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { withInvestorPermission } from "@/components/auth/with-investor-permission";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/layout/card";
 import {
   Table,
   TableBody,
@@ -11,9 +16,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/data/table";
+import { Badge } from "@/components/ui/feedback/badge";
+import { Button } from "@/components/ui";
 import { useRouter } from "next/navigation";
 import type { Database } from "@/types/supabase";
 

@@ -9,8 +9,8 @@ import {
   DropdownMenuTrigger,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui";
+import { Button } from "@/components/ui";
 
 export function ThemeDropdown() {
   const { theme, setTheme } = useTheme();

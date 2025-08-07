@@ -7,18 +7,19 @@
 **Problem**: The codebase has at least 5 different ways to create Supabase clients, leading to confusion and potential bugs:
 
 - `src/lib/supabase/client.ts` - @supabase/ssr browser client
-- `src/lib/supabase/server.ts` - @supabase/ssr server client  
+- `src/lib/supabase/server.ts` - @supabase/ssr server client
 - `src/lib/supabase.ts` - Custom Clerk integration
 - `src/lib/supabase-client.ts` - Client-side with Clerk
 - `src/lib/supabase-server.ts` - Server-side with Clerk
 
 **Files Affected**:
+
 - `src/lib/supabase/` (entire directory)
 - `src/lib/supabase.ts`
-- `src/lib/supabase-client.ts` 
+- `src/lib/supabase-client.ts`
 - `src/lib/supabase-server.ts`
 
-**Recommendation**: 
+**Recommendation**:
 Consolidate to a single, consistent approach. Choose either the @supabase/ssr approach OR the Clerk integration approach, but not both.
 
 ### 2. **Inconsistent Authentication Patterns** ⚠️ HIGH PRIORITY
@@ -29,7 +30,7 @@ Consolidate to a single, consistent approach. Choose either the @supabase/ssr ap
 // In hooks/use-investor-permissions.ts - WRONG APPROACH
 const supabase = createClientComponentClient<Database>();
 
-// In api/investor-statements/route.ts - DIFFERENT APPROACH  
+// In api/investor-statements/route.ts - DIFFERENT APPROACH
 const supabase = createRouteHandlerClient({ cookies });
 
 // In actions/deals.ts - YET ANOTHER APPROACH
@@ -37,6 +38,7 @@ const supabase = await getSupabaseClient();
 ```
 
 **Files Affected**:
+
 - `src/hooks/use-investor-permissions.ts` (lines 11-12)
 - `src/app/api/investor-statements/route.ts` (lines 10)
 - `src/app/actions/deals.ts` (line 8)
@@ -48,12 +50,14 @@ const supabase = await getSupabaseClient();
 **Problem**: Several security vulnerabilities found:
 
 #### a) Unsafe Client Usage
+
 ```typescript
 // In use-investor-permissions.ts - BYPASSES AUTHENTICATION
 const supabase = createClientComponentClient<Database>();
 ```
 
 #### b) Missing Input Validation
+
 ```typescript
 // In actions/deals.ts (lines 48-56) - NO VALIDATION
 const { error } = await supabase.from("deal").insert({
@@ -64,6 +68,7 @@ const { error } = await supabase.from("deal").insert({
 ```
 
 #### c) Improper Access Control
+
 ```typescript
 // In actions/deals.ts (lines 134-141) - WEAK PERMISSION CHECK
 const { data: dealContact, error: checkError } = await supabase
@@ -94,7 +99,7 @@ if (!documentFileSize) { // This logic is flawed
 
 ```typescript
 // In api/storage/setup/route.ts (lines 80-95) - TOO PERMISSIVE
-CREATE POLICY "Allow users to read any documents" 
+CREATE POLICY "Allow users to read any documents"
 ON storage.objects
 FOR SELECT
 TO authenticated
@@ -126,6 +131,7 @@ if (error) {
 ### CRITICAL FIXES (Implement Immediately)
 
 #### 1. Fix Authentication Security
+
 Replace unsafe client usage:
 
 ```typescript
@@ -137,18 +143,22 @@ const supabase = useSupabase(); // Use your existing hook
 ```
 
 #### 2. Consolidate Client Creation
+
 Choose ONE approach and remove others:
 
-**Option A: Use Clerk Integration** (Recommended)
+#### Option A: Use Clerk Integration (Recommended)
+
 - Keep: `src/lib/supabase-server.ts` and `src/hooks/use-supabase.ts`
 - Remove: `src/lib/supabase/` directory entirely
 - Remove: `src/lib/supabase.ts` and `src/lib/supabase-client.ts`
 
-**Option B: Use @supabase/ssr**
+#### Option B: Use @supabase/ssr
+
 - Keep: `src/lib/supabase/` directory
 - Remove: All Clerk-specific Supabase files
 
 #### 3. Fix Data Type Handling
+
 ```typescript
 // In actions/deals.ts - Fix ID generation and usage
 const dealId = Math.floor(100000 + Math.random() * 900000); // Generate as number
@@ -163,13 +173,13 @@ Create proper RLS policies for each table:
 
 ```sql
 -- Example for deals table
-CREATE POLICY "Users can only see their deals" 
+CREATE POLICY "Users can only see their deals"
 ON deal
 FOR SELECT
 TO authenticated
 USING (
   id IN (
-    SELECT DISTINCT dr.deal_id 
+    SELECT DISTINCT dr.deal_id
     FROM deal_roles dr
     JOIN contact c ON dr.contact_id = c.id
     JOIN auth_user_profile aup ON c.email_address = aup.email
@@ -179,9 +189,10 @@ USING (
 ```
 
 #### 5. Add Input Validation
+
 ```typescript
 // Add validation schemas using zod or similar
-import { z } from 'zod';
+import { z } from "zod";
 
 const createDealSchema = z.object({
   name: z.string().min(1).max(255),
@@ -191,10 +202,11 @@ const createDealSchema = z.object({
 ```
 
 #### 6. Fix Storage Policies
+
 Implement user-specific storage access:
 
 ```sql
-CREATE POLICY "Users can only access their documents" 
+CREATE POLICY "Users can only access their documents"
 ON storage.objects
 FOR ALL
 TO authenticated
@@ -207,44 +219,47 @@ USING (
 ### MEDIUM PRIORITY IMPROVEMENTS
 
 #### 7. Standardize Error Handling
+
 Create a consistent error handling pattern:
 
 ```typescript
 // Create src/lib/error-handler.ts
 export function handleSupabaseError(error: any, context: string) {
   console.error(`Supabase error in ${context}:`, error);
-  
-  if (error.code === 'PGRST116') {
-    throw new Error('No data found');
+
+  if (error.code === "PGRST116") {
+    throw new Error("No data found");
   }
-  if (error.code === '23505') {
-    throw new Error('Duplicate entry');
+  if (error.code === "23505") {
+    throw new Error("Duplicate entry");
   }
-  
-  throw new Error(error.message || 'Database operation failed');
+
+  throw new Error(error.message || "Database operation failed");
 }
 ```
 
 #### 8. Optimize Performance
+
 - Implement connection pooling
 - Add request caching where appropriate
 - Use Supabase's built-in caching headers
 
 #### 9. Add Comprehensive Logging
+
 ```typescript
 // Add to all database operations
-console.log('Supabase operation:', {
-  operation: 'SELECT',
-  table: 'deals',
+console.log("Supabase operation:", {
+  operation: "SELECT",
+  table: "deals",
   user: userId,
-  timestamp: new Date().toISOString()
+  timestamp: new Date().toISOString(),
 });
 ```
 
 ## Files Requiring Immediate Attention
 
 1. **`src/hooks/use-investor-permissions.ts`** - Security vulnerability
-2. **`src/app/actions/deals.ts`** - Type safety and validation issues  
+2. **`src/app/actions/deals.ts`** - Type safety and validation issues
 3. **`src/app/api/investor-statements/route.ts`** - Inconsistent auth pattern
 4. **`src/lib/supabase-server.ts`** - Should be the single source of truth
 5. **`src/app/api/storage/setup/route.ts`** - Overly permissive policies
@@ -252,7 +267,7 @@ console.log('Supabase operation:', {
 ## Testing Recommendations
 
 1. **Security Testing**: Verify RLS policies prevent unauthorized access
-2. **Type Testing**: Ensure all database operations are type-safe  
+2. **Type Testing**: Ensure all database operations are type-safe
 3. **Error Testing**: Test error scenarios and ensure proper handling
 4. **Performance Testing**: Monitor query performance and optimize slow operations
 
@@ -260,7 +275,7 @@ console.log('Supabase operation:', {
 
 1. **Phase 1**: Fix critical security issues (use-investor-permissions.ts)
 2. **Phase 2**: Consolidate client creation patterns
-3. **Phase 3**: Implement proper RLS policies  
+3. **Phase 3**: Implement proper RLS policies
 4. **Phase 4**: Add comprehensive input validation
 5. **Phase 5**: Standardize error handling and logging
 

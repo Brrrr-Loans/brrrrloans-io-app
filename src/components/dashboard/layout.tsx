@@ -3,9 +3,9 @@
 import type React from "react";
 import { useAuth } from "@/hooks/use-clerk-auth";
 import { AppSidebar } from "@/components/layout/app-sidebar";
-import { DataTable } from "@/components/ui/data-table";
+import { DataTable } from "@/components/ui/data/data-table";
 import { SiteHeader } from "@/components/layout/site-header";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/layout/sidebar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

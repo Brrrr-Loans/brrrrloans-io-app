@@ -204,8 +204,9 @@
   opacity: 0 !important;
 }
 
-/* Fix sidebar menu button sizing to match reference design - exclude footer */
+/* Fix sidebar menu button sizing to match reference design - exclude header and footer */
 [data-sidebar="menu-button"]:not(
+    [data-sidebar="header"] [data-sidebar="menu-button"],
     [data-sidebar="footer"] [data-sidebar="menu-button"]
   ) {
   height: 2rem !important; /* h-8 equivalent */
@@ -214,8 +215,9 @@
   font-size: 0.875rem !important; /* text-sm */
 }
 
-/* Override the large size variant to match reference - exclude footer */
+/* Override the large size variant to match reference - exclude header and footer */
 [data-sidebar="menu-button"][data-size="lg"]:not(
+    [data-sidebar="header"] [data-sidebar="menu-button"],
     [data-sidebar="footer"] [data-sidebar="menu-button"]
   ) {
   height: 2rem !important; /* Force h-8 instead of h-12 */
@@ -267,11 +269,11 @@
 
 /* Ask AI button specific styling - must come first for specificity */
 [data-sidebar="menu-button"].bg-primary {
-  color: white !important;
+  color: hsl(var(--primary-foreground)) !important;
 }
 
 .dark [data-sidebar="menu-button"].bg-primary {
-  color: black !important;
+  color: hsl(var(--primary-foreground)) !important;
 }
 
 /* Sidebar menu button text styling - override component inline styles */
@@ -289,8 +291,8 @@
   ):hover {
   color: hsl(var(--sidebar-foreground)) !important;
   background-color: hsl(
-    240deg 4.8% 90%
-  ) !important; /* Darker than default sidebar-accent in light mode */
+    240deg 4.8% 85%
+  ) !important; /* More prominent hover state in light mode */
 }
 
 [data-sidebar="menu-button"][data-active="true"]:not(
@@ -300,8 +302,8 @@
   color: hsl(var(--sidebar-foreground)) !important;
   font-weight: 400 !important;
   background-color: hsl(
-    240deg 4.8% 90%
-  ) !important; /* Darker than default sidebar-accent in light mode */
+    240deg 4.8% 85%
+  ) !important; /* More prominent active state in light mode */
 }
 
 /* Dark mode specific overrides - footer first due to higher specificity */

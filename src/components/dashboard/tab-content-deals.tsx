@@ -1,10 +1,23 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Eye } from "lucide-react"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/layout/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/data/table";
+import { Badge } from "@/components/ui/feedback/badge";
+import { Button } from "@/components/ui";
+import { Eye } from "lucide-react";
 
 const deals = [
   {
@@ -52,14 +65,16 @@ const deals = [
     roi: "13.1%",
     date: "2024-04-30",
   },
-]
+];
 
 export function RecentDeals() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Recent Deals</CardTitle>
-        <CardDescription>Overview of your most recent investment deals</CardDescription>
+        <CardDescription>
+          Overview of your most recent investment deals
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <Table>
@@ -84,9 +99,15 @@ export function RecentDeals() {
                 <TableCell>{deal.amount}</TableCell>
                 <TableCell>{deal.roi}</TableCell>
                 <TableCell>
-                  <Badge variant={deal.status === "Active" ? "default" : "secondary"}>{deal.status}</Badge>
+                  <Badge
+                    variant={deal.status === "Active" ? "default" : "secondary"}
+                  >
+                    {deal.status}
+                  </Badge>
                 </TableCell>
-                <TableCell>{new Date(deal.date).toLocaleDateString()}</TableCell>
+                <TableCell>
+                  {new Date(deal.date).toLocaleDateString()}
+                </TableCell>
                 <TableCell className="text-right">
                   <Button variant="ghost" size="icon">
                     <Eye className="h-4 w-4" />
@@ -99,5 +120,5 @@ export function RecentDeals() {
         </Table>
       </CardContent>
     </Card>
-  )
+  );
 }

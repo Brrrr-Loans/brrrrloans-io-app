@@ -8,15 +8,15 @@ import {
 } from "@builder.io/react";
 import { BuilderContent } from "@builder.io/sdk";
 import { useState, useEffect, use } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/forms/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from "@/components/ui/layout/card";
+import { Badge } from "@/components/ui/feedback/badge";
 import { SiteHeader } from "@/components/layout/site-header";
 // Import the component registry
 

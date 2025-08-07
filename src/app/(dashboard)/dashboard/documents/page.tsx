@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
   CardFooter,
-} from "@/components/ui/card";
+} from "@/components/ui/layout/card";
 import {
   Table,
   TableBody,
@@ -16,17 +16,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/data/table";
+import { Button } from "@/components/ui/forms/button";
+import { Input } from "@/components/ui/forms/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
+} from "@/components/ui/forms/select";
+import { Badge } from "@/components/ui/feedback/badge";
 import { Download, Plus, Search, BarChart, FileText } from "lucide-react";
 import { useSupabase } from "@/hooks/use-supabase";
 import { useUser } from "@/hooks/use-clerk-auth";

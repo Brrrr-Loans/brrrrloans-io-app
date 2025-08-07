@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui";
 import { AlertCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui";
 
 interface ErrorBoundaryState {
   hasError: boolean;

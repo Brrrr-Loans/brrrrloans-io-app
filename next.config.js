@@ -7,6 +7,8 @@ const nextConfig = {
       { protocol: "https", hostname: "assets.vercel.com" },
       { protocol: "https", hostname: "supabase.com" },
       { protocol: "https", hostname: "cdn.builder.io" },
+      { protocol: "https", hostname: "img.clerk.com" },
+      { protocol: "https", hostname: "images.clerk.dev" },
     ],
   },
   allowedDevOrigins: [

@@ -34,9 +34,9 @@ import {
 } from "@dnd-kit/sortable";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/components/ui/feedback/badge";
+import { Button } from "@/components/ui";
+import { Checkbox } from "@/components/ui";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -45,8 +45,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/overlays/dropdown-menu";
+import { Input } from "@/components/ui";
 import {
   Table,
   TableBody,
@@ -54,7 +54,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/data/table";
 import {
   ArrowUpDown,
   ChevronDown,
@@ -73,7 +73,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui";
 import type { Tables } from "@/types/supabase";
 
 // Extended type with joined data
