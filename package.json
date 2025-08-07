@@ -2,7 +2,6 @@
   "name": "brrrr-loans-1-los",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -52,7 +51,7 @@
     "embla-carousel-auto-scroll": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
-    "framer-motion": "^12.6.0",
+
     "hast-util-to-html": "^9.0.5",
     "lucide-react": "^0.483.0",
     "motion": "^12.9.7",
