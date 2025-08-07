@@ -23,7 +23,7 @@ const isProtectedRoute = createRouteMatcher([
   "/api/storage(.*)",
 ]);
 
-export default clerkMiddleware((auth, req: NextRequest) => {
+export default clerkMiddleware(async (auth, req: NextRequest) => {
   // TEMPORARILY BYPASS ALL API ROUTES FOR DEBUGGING
   if (req.nextUrl.pathname.startsWith("/api/")) {
     console.log("🔓 BYPASSING MIDDLEWARE for API route:", req.nextUrl.pathname);
@@ -56,7 +56,7 @@ export default clerkMiddleware((auth, req: NextRequest) => {
 
   // Protect routes that require authentication
   if (isProtectedRoute(req)) {
-    const { userId } = auth();
+    const { userId } = await auth();
 
     console.log("🔒 Middleware check:", {
       path: req.nextUrl.pathname,
